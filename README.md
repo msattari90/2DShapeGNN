@@ -81,7 +81,7 @@ You can modify the training parameters, data generation settings, and model conf
 - **`model.input_dim`**: Number of input features per node (e.g., 2 for x and y coordinates of nodes).
 - **`model.hidden_dim`**: Number of hidden units per layer in the GNN model.
 - **`model.output_dim`**: Number of output classes (in this case, 5 shape categories: triangle, rectangle, etc.).
-- **`model.num_layers`**: Number of GCN layers in the GNN model (the depth of the network).
+- **`model.num_layers`**: Number of Graph Convolutional Network (GCN) layers in the GNN model (the depth of the network).
 - **`model.dropout`**: Dropout rate for regularization (prevents overfitting by randomly setting some nodes' features to zero).
 
 - **`training.learning_rate`**: The learning rate for the Adam optimizer, controlling the step size during optimization.
