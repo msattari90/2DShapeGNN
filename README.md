@@ -2,16 +2,14 @@
 
 ## Introduction
 
-This project demonstrates the use of Graph Neural Networks (GNNs) for classifying synthetic 2D shapes (triangles, rectangles, circles, hexagons, ellipses). The pipeline covers the full machine learning workflow, from synthetic data generation, preprocessing, model training, evaluation, and visualization.
-
-The goal is to classify simple 2D shapes based on their geometric properties using GNNs, with the flexibility to experiment with various model configurations and hyperparameters.
+This project demonstrates the use of **Graph Neural Networks (GNNs)** to classify synthetic 2D shapes (triangles, rectangles, circles, hexagons, ellipses). It covers the full machine learning pipeline from data generation, preprocessing, model training, evaluation, and visualization, allowing experimentation with various configurations and hyperparameters.
 
 ## Features:
-- Generates synthetic 2D shapes and applies data augmentation.
-- Preprocesses the data into graph representations suitable for GNNs.
-- Implements a configurable GNN model that is dynamic and can be adjusted using a `config.json` file.
-- Includes early stopping to prevent overfitting during training.
-- Provides detailed visualization of predictions and evaluation metrics.
+- Generates synthetic 2D shapes and applies data augmentation (scaling, rotation).
+- Preprocesses data into graph representations for GNNs.
+- Implements a configurable GNN model using `config.json`.
+- Includes early stopping to prevent overfitting.
+- Provides visualization of predictions and evaluation metrics.
 
 ## Prerequisites
 
@@ -36,7 +34,7 @@ pip install -r requirements.txt
 
 ### Additional Information
 - This project uses PyTorch and PyTorch Geometric for implementing the Graph Neural Network.
-- The dataset is synthetic, and the shape generation process is random, so the number of samples can be easily adjusted via the config.json file.
+- The dataset is synthetic, and the shape generation process is random. You can adjust the number of samples via `config.json file`.
 
 ## Project Structure
 
@@ -64,9 +62,6 @@ The project is organized into the following files:
 - **`start.py`**: Runs the entire pipeline automatically (data generation, training, evaluation, and visualization).
 - **`utils.py`**: Contains utility functions like configuration loading and early stopping implementation.
 - **`requirements.txt`**: Contains Python package dependencies.
-
-### Configuration File
-The project uses a configuration file (`config.json`) to manage hyperparameters and other settings, making it easy to experiment with different configurations without modifying the code.
 
 ## Setup Instructions
 
@@ -115,9 +110,9 @@ This will automatically run the following steps:
 3. GNNModel.py: Trains the GNN model using the preprocessed data.
 4. EvaluationAndVisualization.py: Evaluates the model and visualizes the results.
 
-2. **Monitor Training**: During the training process, you’ll see the loss printed every epoch. If the validation loss stops improving for several epochs (controlled by early_stopping_patience), the training will halt early to prevent overfitting.
+2. **Monitor Training**: During the training process, you’ll see the loss printed every epoch. If the validation loss stops improving for several epochs (controlled by `early_stopping_patience`), the training will halt early to prevent overfitting.
    
-3. **Model Saving**: After the training completes, the model will be saved as trained_model.pth. You can reload this model for further analysis or inference.
+3. **Model Saving**: After the training completes, the model will be saved as `trained_model.pth`. You can reload this model for further analysis or inference.
 
 4. **Evaluation and Visualization**: After training, the script will evaluate the model on the test set and display visualizations of the predictions. These visualizations show the predicted labels for each graph, allowing you to visually inspect the performance of the model.
 
@@ -177,15 +172,8 @@ The `EvaluationAndVisualization.py` script generates visualizations that include
 - **Graph edges**: The edges are drawn connecting the nodes.
 - **Predicted labels**: Each graph's predicted label is shown in the title of the plot.
 
-**How Visualization Works**:
-- The model output (predicted label) is plotted with the graph structure (nodes and edges).
-- This allows you to visually inspect the model's performance, especially for more complex shapes.
-
 **Example output**:
 - A triangle with its predicted label, showing the actual shape structure and the predicted label in the title.
-
-**Model Output Example**
-
 ```plaintext
 Graph Classification: Triangle
 ```
@@ -194,21 +182,11 @@ This indicates the model classified the graph as a "Triangle."
 
 ## Customization and Experimentation
 
-This project is designed to be flexible, allowing you to experiment with different configurations.
-
-### Custom Data Generation
-- Modify the `SyntheticDataGenerationScript.py` to generate additional or more complex shapes.
-- You can change the shapes in the dataset or even add new ones (e.g., polygons, stars).
-
-### Model Configuration
-- You can experiment with different GNN layers, such as replacing `GCNConv` with `GATConv` (Graph Attention Network) or `SAGEConv` (GraphSAGE).
-- Experiment with different architectures by modifying the number of layers, hidden dimensions, or adding residual connections.
-
-### Hyperparameter Tuning
-- Adjust the learning rate, batch size, weight decay, and other training parameters via the `config.json` file to improve the model’s performance.
-
-### Additional Augmentation Techniques
-- Add more augmentation strategies, such as flipping, translation, or adding noise, to increase the robustness of the model.
+This project is designed to be flexible, allowing you to experiment with different configurations:
+**Custom Data Generation**: Modify the `SyntheticDataGenerationScript.py` to generate additional or more complex shapes. You can change the shapes in the dataset or even add new ones (e.g., polygons, stars).
+**Model Configuration**: You can experiment with different GNN layers, such as replacing `GCNConv` with `GATConv` (Graph Attention Network) or `SAGEConv` (GraphSAGE). Experiment with different architectures by modifying the number of layers, hidden dimensions, or adding residual connections.
+**Hyperparameter Tuning**: Adjust the learning rate, batch size, weight decay, and other training parameters via the `config.json` file to improve the model’s performance.
+**Additional Augmentation Techniques**: Add more augmentation strategies, such as flipping, translation, or adding noise, to increase the robustness of the model.
 
 ### Scaling the Dataset
 - Increase the number of samples in `config.json` for a larger dataset, which will improve the model’s ability to generalize
