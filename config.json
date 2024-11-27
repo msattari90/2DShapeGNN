@@ -1,6 +1,6 @@
 {
   "data": {
-    "num_samples": 5000,
+    "num_samples": 10000,
     "train_split": 0.7,
     "validation_split": 0.15,
     "test_split": 0.15,
@@ -16,9 +16,9 @@
   "training": {
     "learning_rate": 0.0025,
     "weight_decay": 0.0001,
-    "batch_size": 32,
+    "batch_size": 16,
     "num_epochs": 200,
-    "early_stopping_patience": 50,
+    "early_stopping_patience": 25,
     "validation_freq": 1
   },
   "augmentation": {
