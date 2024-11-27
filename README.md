@@ -11,26 +11,14 @@ This project demonstrates the use of **Graph Neural Networks (GNNs)** to classif
 - Includes early stopping to prevent overfitting.
 - Provides visualization of predictions and evaluation metrics.
 
-## Prerequisites
+## Prerequisites and Required Libraries
 
 To run this project, you need to have the following software installed:
 
 - Python 3.8 or higher
 - pip (for installing Python packages)
-- Virtual environment (optional but recommended)
-
-### Required Libraries
-
-Install the required libraries using `pip`:
-```bash
-pip install torch torch-geometric numpy matplotlib
-```
-For a clean environment, it's recommended to create a virtual environment before installing the dependencies:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
-pip install -r requirements.txt
-```
+- Virtual environment (optional but recommended): For a clean environment, it's recommended to create a virtual environment before installing the dependencies:
+- Required libraries: torch, torch-geometric, numpy, matplotlib
 
 ### Additional Information
 - This project uses PyTorch and PyTorch Geometric for implementing the Graph Neural Network.
@@ -42,7 +30,6 @@ The project is organized into the following files:
 ```
 /2DAGGNet_Exercise
 	├── config.json # Configuration file for hyperparameters and settings
-	├── requirements.txt # Python package dependencies 
 	├── utils.py # Utility functions for configuration loading and early stopping
 	├── SyntheticDataGenerationScript.py # Data generation script to create synthetic shapes
 	├── PreprocessingData.py # Script to preprocess the shapes into graph format
@@ -61,7 +48,6 @@ The project is organized into the following files:
 - **`EvaluationAndVisualization.py`**: Evaluates the trained model and visualizes its performance on the test set.
 - **`start.py`**: Runs the entire pipeline automatically (data generation, training, evaluation, and visualization).
 - **`utils.py`**: Contains utility functions like configuration loading and early stopping implementation.
-- **`requirements.txt`**: Contains Python package dependencies.
 
 ## Setup Instructions
 
@@ -71,7 +57,7 @@ Clone the repository to your local machine:
 
 ```bash
 git clone <repository_url>
-cd 2DAGGNet_Exercise
+cd 2DAGNNet
 ```
 
 ### Step 2: Install Dependencies
@@ -81,18 +67,34 @@ Create a virtual environment (optional but recommended) and install the required
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
-pip install -r requirements.txt
+pip install torch torch-geometric numpy matplotlib
 ```
 
 ### Step 3: Modify Configuration (Optional)
 
-You can modify the training parameters, data generation settings, and model configurations in the `config.json` file. Here are some of the key parameters you can modify:
+You can modify the training parameters, data generation settings, and model configurations in the `config.json` file. Here are the parameters you can modify:
 
-- **`data.num_samples`**: Number of shapes to generate.
-- **`data.train_split`, `data.validation_split`, `data.test_split`**: Split ratios for the dataset.
-- **`model.num_layers`**: Number of layers in the GNN model.
-- **`training.learning_rate`, `training.weight_decay`**: Training parameters for optimization.
-- **`augmentation.rotation`, `augmentation.scaling`**: Enable or disable data augmentation techniques.
+- **`data.num_samples`**: Number of synthetic 2D shapes to generate for the dataset.
+- **`data.train_split`, `data.validation_split`, `data.test_split`**: Fraction of the dataset used for training, validation, and testing, respectively.
+- **`data.seed`**: Random seed to ensure reproducibility of the dataset generation.
+
+- **`model.input_dim`**: Number of input features per node (e.g., 2 for x and y coordinates of nodes).
+- **`model.hidden_dim`**: Number of hidden units per layer in the GNN model.
+- **`model.output_dim`**: Number of output classes (in this case, 5 shape categories: triangle, rectangle, etc.).
+- **`model.num_layers`**: Number of Graph Convolutional Network (GCN) layers in the GNN model (the depth of the network).
+- **`model.dropout`**: Dropout rate for regularization (prevents overfitting by randomly setting some nodes' features to zero).
+
+- **`training.learning_rate`**: The learning rate for the Adam optimizer, controlling the step size during optimization.
+- **`training.weight_decay`**: Regularization term to avoid overfitting, preventing large weight values.
+- **`training.batch_size`**: The number of graphs to process in one batch during training.
+- **`training.num_epochs`**: Number of training epochs (how many times the model will iterate over the full dataset).
+- **`training.early_stopping_patience`**: Number of epochs with no improvement on the validation loss before stopping early.
+- **`training.validation_freq`**: How often (in terms of epochs) to evaluate the model on the validation set.
+
+- **`augmentation.rotation`**: Whether to apply random rotation to the shapes during data generation.
+- **`augmentation.scaling`**: Whether to apply random scaling to the shapes during data generation.
+- **`augmentation.min_scale`**: Minimum scale factor for scaling augmentation.
+- **`augmentation.max_scale`**: Maximum scale factor for scaling augmentation.
 
 ### Step 4: Running the Project
 
