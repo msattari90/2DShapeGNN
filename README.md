@@ -1,4 +1,4 @@
-# # 2D Shape Classification Using Graph Neural Networks (GNN)
+# 2D Shape Classification Using Graph Neural Networks (GNN)
 
 ## Introduction
 
@@ -95,6 +95,8 @@ You can modify the training parameters, data generation settings, and model conf
 - **`augmentation.scaling`**: Whether to apply random scaling to the shapes during data generation.
 - **`augmentation.min_scale`**: Minimum scale factor for scaling augmentation.
 - **`augmentation.max_scale`**: Maximum scale factor for scaling augmentation.
+- **`augmentation.translation`**: Adding translation for even more data diversity
+- **`augmentation.flip`**: Random flipping of shapes
 
 ### Step 4: Running the Project
 
