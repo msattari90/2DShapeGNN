@@ -172,7 +172,8 @@ class ShapeDataset:
         plt.scatter(nodes[:, 0], nodes[:, 1], color="red")  # Mark vertices
         plt.title(shape.label)  # Show shape label
         plt.axis("equal")  # Keep aspect ratio
-        plt.show()
+        plt.pause(0.5)
+        plt.close()
 
 if __name__ == "__main__":
     # Load configuration

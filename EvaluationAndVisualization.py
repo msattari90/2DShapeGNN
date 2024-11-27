@@ -3,7 +3,7 @@ from torch_geometric.loader import DataLoader
 import matplotlib.pyplot as plt
 from utils import load_config
 from GNNModel import SimpleGNN
-from SyntheticDataGenerationScript import ShapeDataset
+import random
 
 class Evaluator:
     """

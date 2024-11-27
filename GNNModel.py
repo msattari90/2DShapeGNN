@@ -9,8 +9,7 @@ import random
 import numpy as np
 
 # Setup logging
-logging.basicConfig(filename="training_log.txt", level=logging.INFO, 
-                    format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(filename="training_log.txt", level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 # Log the configuration
 logging.info("Configuration: %s", load_config())
