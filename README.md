@@ -24,27 +24,21 @@ To run this project, you need to have the following software installed:
 ### Required Libraries
 
 Install the required libraries using `pip`:
-
 ```bash
 pip install torch torch-geometric numpy matplotlib
-
+```
 For a clean environment, it's recommended to create a virtual environment before installing the dependencies:
-
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
 pip install -r requirements.txt
-
+```
 Additional Information
 - This project uses PyTorch and PyTorch Geometric for implementing the Graph Neural Network.
 - The dataset is synthetic, and the shape generation process is random, so the number of samples can be easily adjusted via the config.json file.
 
-
----
-
 ### Section 3: Project Structure
 
-```markdown
 ## Project Structure
 
 The project is organized into the following files:
@@ -59,7 +53,6 @@ The project is organized into the following files:
 	├── EvaluationAndVisualization.py # Evaluation and visualization of model performance
 	├── start.py # Script to run the entire pipeline with one command
 	└── README.md # This README file
-
 
 ### File Descriptions:
 
@@ -83,6 +76,7 @@ Clone the repository to your local machine:
 ```bash
 git clone <repository_url>
 cd 2DAGGNet_Exercise
+```
 
 ### Step 2: Install Dependencies
 
@@ -92,6 +86,7 @@ Create a virtual environment (optional but recommended) and install the required
 python -m venv .venv
 source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
 pip install -r requirements.txt
+```
 
 ### Step 3: Modify Configuration (Optional)
 
@@ -109,7 +104,7 @@ To run the entire pipeline (data generation, preprocessing, model training, and 
 
 ```bash
 python start.py
-
+```
 This will automatically run the following steps:
 
 1. SyntheticDataGenerationScript.py: Generates synthetic 2D shapes and applies augmentation.
@@ -138,6 +133,7 @@ After configuring your `config.json` file and ensuring that all dependencies are
    
    ```bash
    python start.py
+   ```
 
 2. **Monitor Training**: During the training process, you’ll see the loss printed every epoch. If the validation loss stops improving for several epochs (controlled by early_stopping_patience), the training will halt early to prevent overfitting.
    
@@ -145,12 +141,8 @@ After configuring your `config.json` file and ensuring that all dependencies are
 
 4. **Evaluation and Visualization**: After training, the script will evaluate the model on the test set and display visualizations of the predictions. These visualizations show the predicted labels for each graph, allowing you to visually inspect the performance of the model.
 
-
----
-
 ### Section 5: Model Architecture and Training
 
-```markdown
 ## Model Architecture
 
 ### Graph Neural Network (GNN) Model
@@ -190,8 +182,6 @@ The model's performance can be improved by tuning the following hyperparameters 
 
 Experiment with different values to improve the accuracy of the model.
 
----
-
 ### Section 6: Model Evaluation and Visualization
 
 Once the model is trained, we evaluate its performance on the test set. The evaluation includes:
@@ -216,15 +206,12 @@ Example output:
 
 ```plaintext
 Graph Classification: Triangle
+```
 
 This indicates the model classified the graph as a "Triangle."
 
-
----
-
 ### Section 7: Customization and Experimentation
 
-```markdown
 ## Customization and Experimentation
 
 This project is designed to be flexible, allowing you to experiment with different configurations.
