@@ -1,4 +1,4 @@
-# 2D Graph Neural Network for Shape Classification
+# # 2D Shape Classification Using Graph Neural Networks (GNN)
 
 ## Introduction
 
@@ -122,6 +122,8 @@ This will automatically run the following steps:
 
 ### Model Architecture
 
+This project uses **Graph Convolutional Networks (GCN)** for classifying synthetic 2D shapes. The model learns to classify graphs (representing 2D shapes) based on their node features (coordinates) and edge connections (defining shape boundaries).
+
 #### Graph Neural Network (GNN) Model
 
 The model uses **Graph Convolutional Networks (GCN)** for classifying 2D shapes. The architecture consists of multiple graph convolution layers followed by global pooling, which aggregates node-level features into graph-level features.
@@ -163,7 +165,8 @@ Experiment with different values to improve the accuracy of the model.
 
 ### Evaluation
 
-Once the model is trained, we evaluate its performance on the test set. The evaluation includes:
+Once the model is trained, we evaluate its performance on the test set.The training process utilizes early stopping to prevent overfitting. If the validation loss does not improve for a specified number of epochs (`early_stopping_patience`), the training process is halted, saving time and avoiding overfitting.
+The evaluation includes:
 1. **Accuracy**: The percentage of correctly classified graphs in the test set.
 2. **Visualization**: We visualize the predictions, displaying the predicted labels for the test graphs.
 
