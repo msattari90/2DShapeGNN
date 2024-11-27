@@ -11,26 +11,14 @@ This project demonstrates the use of **Graph Neural Networks (GNNs)** to classif
 - Includes early stopping to prevent overfitting.
 - Provides visualization of predictions and evaluation metrics.
 
-## Prerequisites
+## Prerequisites and Required Libraries
 
 To run this project, you need to have the following software installed:
 
 - Python 3.8 or higher
 - pip (for installing Python packages)
-- Virtual environment (optional but recommended)
-
-### Required Libraries
-
-Install the required libraries using `pip`:
-```bash
-pip install torch torch-geometric numpy matplotlib
-```
-For a clean environment, it's recommended to create a virtual environment before installing the dependencies:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
-pip install -r requirements.txt
-```
+- Virtual environment (optional but recommended): For a clean environment, it's recommended to create a virtual environment before installing the dependencies:
+- Required libraries: torch, torch-geometric, numpy, matplotlib
 
 ### Additional Information
 - This project uses PyTorch and PyTorch Geometric for implementing the Graph Neural Network.
@@ -42,7 +30,6 @@ The project is organized into the following files:
 ```
 /2DAGGNet_Exercise
 	├── config.json # Configuration file for hyperparameters and settings
-	├── requirements.txt # Python package dependencies 
 	├── utils.py # Utility functions for configuration loading and early stopping
 	├── SyntheticDataGenerationScript.py # Data generation script to create synthetic shapes
 	├── PreprocessingData.py # Script to preprocess the shapes into graph format
@@ -61,7 +48,6 @@ The project is organized into the following files:
 - **`EvaluationAndVisualization.py`**: Evaluates the trained model and visualizes its performance on the test set.
 - **`start.py`**: Runs the entire pipeline automatically (data generation, training, evaluation, and visualization).
 - **`utils.py`**: Contains utility functions like configuration loading and early stopping implementation.
-- **`requirements.txt`**: Contains Python package dependencies.
 
 ## Setup Instructions
 
@@ -81,7 +67,7 @@ Create a virtual environment (optional but recommended) and install the required
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
-pip install -r requirements.txt
+pip install torch torch-geometric numpy matplotlib
 ```
 
 ### Step 3: Modify Configuration (Optional)
