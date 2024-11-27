@@ -1,3 +1,5 @@
+import os
+import json
 import numpy as np
 import random
 import matplotlib.pyplot as plt
@@ -120,13 +122,23 @@ class ShapeDataset:
         self.num_samples = config["data"]["num_samples"]  # Number of samples to generate
         self.augment_config = config["augmentation"]      # Augmentation settings
         self.shapes = []                                  # List of generated shapes
-
+        
+        # Create directories for saving shapes
+        self.train_dir = "shapes/train"
+        self.val_dir = "shapes/val"
+        self.test_dir = "shapes/test"
+        
+        # Ensure the directories exist
+        os.makedirs(self.train_dir, exist_ok=True)
+        os.makedirs(self.val_dir, exist_ok=True)
+        os.makedirs(self.test_dir, exist_ok=True)
+        
     def generate(self):
         """
         Generate a dataset of random shapes with optional augmentations.
         """
         shape_classes = [Triangle, Rectangle, Circle, Hexagon, Ellipse]
-        for _ in range(self.num_samples):
+        for idx in range(self.num_samples):
             shape = random.choice(shape_classes)()  # Randomly choose a shape class
 
             # Apply random rotation if enabled
@@ -143,7 +155,36 @@ class ShapeDataset:
                 shape.scale(scale)
 
             self.shapes.append(shape)
+            
+            # Save shape to appropriate folder (train/val/test)
+            split = self._get_split(idx)
+            self.save_shape(shape, split)
 
+    def _get_split(self, idx):
+        """Return 'train', 'val', or 'test' based on index."""
+        if idx < self.num_samples * 0.7:
+            return "train"
+        elif idx < self.num_samples * 0.85:
+            return "val"
+        else:
+            return "test"
+
+    def save_shape(self, shape, split):
+        """Save the shape to a subfolder."""
+        # Convert nodes (NumPy array) to list and ensure the edges are also in a serializable format
+        shape_data = {
+            "label": shape.label, 
+            "nodes": shape.nodes.tolist(),  # Convert NumPy array to list
+            "edges": shape.edges  # Edges are already a list of tuples, so no conversion needed
+        }
+        file_name = f"{shape.label}_{random.randint(0, 9999)}.json"
+        file_path = os.path.join("shapes", split, file_name)
+        
+        # Save the shape data as JSON
+        with open(file_path, 'w') as f:
+            json.dump(shape_data, f, indent=4)
+
+    
     def visualize_each_class(self):
         """
         Visualize one example from each shape class.

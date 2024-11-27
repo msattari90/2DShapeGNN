@@ -13,6 +13,7 @@
 *.pth
 *.venv
 *log.txt
+shapes
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
