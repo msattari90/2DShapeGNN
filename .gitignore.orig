@@ -9,8 +9,11 @@
 *.user
 *.userosscache
 *.sln.docstates
+<<<<<<< HEAD
 *.pt
 *.pth
+=======
+>>>>>>> 6006816617314cdf3a939b3e5f7b562afb32002c
 *.venv
 
 # User-specific files (MonoDevelop/Xamarin Studio)
