@@ -33,16 +33,15 @@ python -m venv .venv
 source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
 pip install -r requirements.txt
 ```
-Additional Information
+
+### Additional Information
 - This project uses PyTorch and PyTorch Geometric for implementing the Graph Neural Network.
 - The dataset is synthetic, and the shape generation process is random, so the number of samples can be easily adjusted via the config.json file.
-
-### Section 3: Project Structure
 
 ## Project Structure
 
 The project is organized into the following files:
-
+```
 /2DAGGNet_Exercise
 	├── config.json # Configuration file for hyperparameters and settings
 	├── requirements.txt # Python package dependencies 
@@ -53,6 +52,7 @@ The project is organized into the following files:
 	├── EvaluationAndVisualization.py # Evaluation and visualization of model performance
 	├── start.py # Script to run the entire pipeline with one command
 	└── README.md # This README file
+```
 
 ### File Descriptions:
 
@@ -63,6 +63,7 @@ The project is organized into the following files:
 - **`EvaluationAndVisualization.py`**: Evaluates the trained model and visualizes its performance on the test set.
 - **`start.py`**: Runs the entire pipeline automatically (data generation, training, evaluation, and visualization).
 - **`utils.py`**: Contains utility functions like configuration loading and early stopping implementation.
+- **`requirements.txt`**: Contains Python package dependencies.
 
 ### Configuration File
 The project uses a configuration file (`config.json`) to manage hyperparameters and other settings, making it easy to experiment with different configurations without modifying the code.
@@ -100,6 +101,8 @@ You can modify the training parameters, data generation settings, and model conf
 
 ### Step 4: Running the Project
 
+1. **Run the Full Pipeline**:
+
 To run the entire pipeline (data generation, preprocessing, model training, and evaluation), simply execute the `start.py` script:
 
 ```bash
@@ -112,49 +115,26 @@ This will automatically run the following steps:
 3. GNNModel.py: Trains the GNN model using the preprocessed data.
 4. EvaluationAndVisualization.py: Evaluates the model and visualizes the results.
 
-Once the script completes, you will have:
-
-- Generated shapes: Visualized with augmentation (rotation/scaling).
-- A trained model: Saved as trained_model.pth.
-- Evaluation results: Printed accuracy, visualized predictions, and model performance metrics.
-
-### Step 5: Model Training and Evaluation
-
-After configuring your `config.json` file and ensuring that all dependencies are installed, you can start training the model.
-
-1. **Run the Full Pipeline**:
-   The easiest way to train the model and evaluate the results is to use the `start.py` script. This script will:
-   - Generate synthetic data.
-   - Preprocess the data into graph format.
-   - Train the Graph Neural Network (GNN).
-   - Evaluate the model and visualize the predictions.
-
-   Simply run the following command:
-   
-   ```bash
-   python start.py
-   ```
-
 2. **Monitor Training**: During the training process, you’ll see the loss printed every epoch. If the validation loss stops improving for several epochs (controlled by early_stopping_patience), the training will halt early to prevent overfitting.
    
 3. **Model Saving**: After the training completes, the model will be saved as trained_model.pth. You can reload this model for further analysis or inference.
 
 4. **Evaluation and Visualization**: After training, the script will evaluate the model on the test set and display visualizations of the predictions. These visualizations show the predicted labels for each graph, allowing you to visually inspect the performance of the model.
 
-### Section 5: Model Architecture and Training
+## Model Architecture and Training
 
-## Model Architecture
+### Model Architecture
 
-### Graph Neural Network (GNN) Model
+#### Graph Neural Network (GNN) Model
 
 The model uses **Graph Convolutional Networks (GCN)** for classifying 2D shapes. The architecture consists of multiple graph convolution layers followed by global pooling, which aggregates node-level features into graph-level features.
 
-#### Key Components:
+##### Key Components:
 - **GCNConv Layers**: These layers perform graph convolution, aggregating information from neighboring nodes.
 - **Global Mean Pooling**: After the node features are updated by the GCN layers, global pooling is used to aggregate node-level features into a fixed-size vector representing the entire graph.
 - **Fully Connected Layer**: A final fully connected layer takes the pooled features and outputs the class prediction for each graph.
 
-#### Model Flow:
+##### Model Flow:
 1. **Input**: A graph, represented by node features (`x`), edge indices (`edge_index`), and a batch tensor (`batch`) to map nodes to their respective graphs.
 2. **GCN Layers**: Multiple GCN layers are applied sequentially to learn node representations.
 3. **Global Pooling**: The node representations are aggregated using global mean pooling.
@@ -182,7 +162,9 @@ The model's performance can be improved by tuning the following hyperparameters 
 
 Experiment with different values to improve the accuracy of the model.
 
-### Section 6: Model Evaluation and Visualization
+## Model Evaluation and Visualization
+
+### Evaluation
 
 Once the model is trained, we evaluate its performance on the test set. The evaluation includes:
 1. **Accuracy**: The percentage of correctly classified graphs in the test set.
@@ -199,18 +181,16 @@ The `EvaluationAndVisualization.py` script generates visualizations that include
 - The model output (predicted label) is plotted with the graph structure (nodes and edges).
 - This allows you to visually inspect the model's performance, especially for more complex shapes.
 
-Example output:
+**Example output**:
 - A triangle with its predicted label, showing the actual shape structure and the predicted label in the title.
 
-### Model Output Example
+**Model Output Example**
 
 ```plaintext
 Graph Classification: Triangle
 ```
 
 This indicates the model classified the graph as a "Triangle."
-
-### Section 7: Customization and Experimentation
 
 ## Customization and Experimentation
 
