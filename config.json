@@ -1,6 +1,6 @@
 {
   "data": {
-    "num_samples": 10000,
+    "num_samples": 25000,
     "train_split": 0.7,
     "validation_split": 0.15,
     "test_split": 0.15,

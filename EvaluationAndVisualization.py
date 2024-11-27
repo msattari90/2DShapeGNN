@@ -67,8 +67,7 @@ class Visualizer:
         plt.scatter(nodes[:, 0], nodes[:, 1], color="blue", s=100, alpha=0.8)
         plt.title(f"Predicted: {label_mapping[pred.item()]}")
         plt.axis("equal")
-        plt.pause(0.5)
-        plt.close()
+        plt.show()
 
 # Split data into train, validation, and test sets
 def split_data(graphs, train_split, val_split):
