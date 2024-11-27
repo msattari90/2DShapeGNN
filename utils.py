@@ -1,27 +1,22 @@
 import json
 import torch
+import os
 
 def load_config(config_file="config.json"):
     """
     Load parameters from a JSON configuration file.
-
-    Args:
-        config_file (str): Path to the configuration file.
-
-    Returns:
-        dict: Configuration parameters.
     """
+    if not os.path.exists(config_file):
+        raise FileNotFoundError(f"Configuration file '{config_file}' not found.")
     with open(config_file, "r") as file:
         config = json.load(file)
     return config
 
-
 class EarlyStopping:
     """
-    Implements early stopping to prevent overfitting.
-    Monitors validation loss and stops training if it doesn't improve after a certain number of epochs.
+    Implements early stopping to prevent overfitting by monitoring validation loss.
     """
-    def __init__(self, patience=5, delta=0):
+    def __init__(self, patience, delta=0.0):
         self.patience = patience
         self.delta = delta
         self.best_loss = float('inf')
@@ -30,10 +25,7 @@ class EarlyStopping:
 
     def step(self, val_loss):
         """
-        Step function to evaluate if the model's performance on the validation set has improved.
-
-        Args:
-            val_loss (float): The current validation loss.
+        Evaluate if the model's validation loss improved.
         """
         if val_loss < self.best_loss - self.delta:
             self.best_loss = val_loss

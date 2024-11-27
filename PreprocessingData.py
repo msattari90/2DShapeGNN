@@ -2,6 +2,7 @@ import torch
 from torch_geometric.data import Data
 from utils import load_config
 
+
 class GraphPreprocessor:
     def __init__(self, shapes):
         self.shapes = shapes
@@ -18,7 +19,6 @@ class GraphPreprocessor:
         nodes = torch.tensor(shape.nodes, dtype=torch.float)
         edges = self._build_edge_index(shape.edges)
         label = self._encode_label(shape.label)
-
         return Data(x=nodes, edge_index=edges, y=label)
 
     def _build_edge_index(self, edges):
@@ -33,3 +33,24 @@ class GraphPreprocessor:
     def get_graphs(self):
         """Return the list of preprocessed graphs."""
         return self.graphs
+
+
+if __name__ == "__main__":
+    from SyntheticDataGenerationScript import ShapeDataset
+
+    # Generate shapes
+    config = load_config()
+    dataset = ShapeDataset()
+    dataset.generate()
+
+    # Preprocess shapes into graphs
+    preprocessor = GraphPreprocessor(dataset.shapes)
+    preprocessor.preprocess()
+    graphs = preprocessor.get_graphs()
+
+    # Debugging: Ensure graphs are not empty
+    print(f"Total graphs generated: {len(graphs)}")
+    assert len(graphs) > 0, "Graph preprocessing resulted in an empty dataset!"
+
+    # Save graphs for later use (optional)
+    torch.save(graphs, "processed_graphs.pt")
