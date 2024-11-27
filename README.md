@@ -98,6 +98,8 @@ You can modify the training parameters, data generation settings, and model conf
 - **`augmentation.translation`**: Adding translation for even more data diversity
 - **`augmentation.flip`**: Random flipping of shapes
 
+- **`evaluation.num_test_samples_to_plot`**: Number of test samples to plot randomly
+
 ### Step 4: Running the Project
 
 1. **Run the Full Pipeline**:
