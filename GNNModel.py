@@ -1,11 +1,19 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import logging
 from torch_geometric.nn import GCNConv, global_mean_pool
 from torch_geometric.loader import DataLoader
 from utils import load_config, EarlyStopping
 import random
 import numpy as np
+
+# Setup logging
+logging.basicConfig(filename="training_log.txt", level=logging.INFO, 
+                    format="%(asctime)s - %(levelname)s - %(message)s")
+
+# Log the configuration
+logging.info("Configuration: %s", load_config())
 
 # Set random seeds for reproducibility
 def set_random_seed(seed: int):
@@ -105,8 +113,15 @@ def train_gnn(model, train_loader, val_loader, optimizer, criterion, device, ear
         optimizer.step()
         total_loss += loss.item()
     
+    # Log the training loss
+    logging.info("Train Loss: %.4f", total_loss / len(train_loader))
+
     val_loss = evaluate_gnn(model, val_loader, criterion, device)
     early_stopping.step(val_loss)
+    
+    # Log the validation loss
+    logging.info("Validation Loss: %.4f", val_loss)
+    
     if early_stopping.early_stop:
         print("Early stopping triggered!")
         return total_loss / len(train_loader), True
@@ -161,7 +176,12 @@ def test_gnn(model, loader, device):
             pred = out.argmax(dim=1)
             correct += (pred == data.y).sum().item()
             total += data.y.size(0)
-    return correct / total
+    
+    # Log the test accuracy
+    accuracy = correct / total
+    logging.info("Test Accuracy: %.4f", accuracy)
+    
+    return accuracy
 
 # Split data into train, validation, and test sets
 def split_data(graphs, train_split, val_split):
