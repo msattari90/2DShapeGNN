@@ -131,8 +131,13 @@ if __name__ == "__main__":
 
     # Visualize predictions
     label_mapping = {0: "triangle", 1: "rectangle", 2: "circle", 3: "hexagon", 4: "ellipse"}
+    num_test_samples_to_plot = config["evaluation"]["num_test_samples_to_plot"]
+    
+    # Select random samples from test set to visualize
+    random_samples = random.sample(predictions, num_test_samples_to_plot)
+    
     print("Visualizing predictions...")
     visualizer = Visualizer()
-    for data, preds in predictions:  # Loop over batches
+    for data, preds in random_samples:  # Loop over randomly selected samples
         for graph_idx, pred in enumerate(preds):  # Loop over graphs in the batch
             visualizer.plot_graph(data[graph_idx], pred, label_mapping)
