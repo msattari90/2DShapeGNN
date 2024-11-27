@@ -57,7 +57,7 @@ Clone the repository to your local machine:
 
 ```bash
 git clone <repository_url>
-cd 2DAGGNet_Exercise
+cd 2DAGNNet
 ```
 
 ### Step 2: Install Dependencies
