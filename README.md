@@ -79,7 +79,7 @@ You can modify the training parameters, data generation settings, and model conf
 - **`data.seed`**: Random seed to ensure reproducibility of the dataset generation.
 
 - **`model.input_dim`**: Number of input features per node (e.g., 2 for x and y coordinates of nodes).
-- **`model.hidden_dim`**: Number of hidden units per layer in the GNN model.
+- **`model.hidden_dim`**: Number of hidden units per layer in the GNN model. The size of the feature vectors for each node in the hidden layers of the GNN
 - **`model.output_dim`**: Number of output classes (in this case, 5 shape categories: triangle, rectangle, etc.).
 - **`model.num_layers`**: Number of Graph Convolutional Network (GCN) layers in the GNN model (the depth of the network).
 - **`model.dropout`**: Dropout rate for regularization (prevents overfitting by randomly setting some nodes' features to zero).
