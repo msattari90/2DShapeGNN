@@ -220,6 +220,7 @@ if __name__ == "__main__":
 
     # Load preprocessed graphs
     graphs = torch.load("processed_graphs.pt")
+    
     train_graphs, val_graphs, test_graphs = split_data(
         graphs,
         train_split=config["data"]["train_split"],
@@ -239,6 +240,7 @@ if __name__ == "__main__":
         num_layers=config["model"]["num_layers"],
         dropout=config["model"]["dropout"]
     ).to(device)
+    
     optimizer = torch.optim.Adam(model.parameters(), lr=config["training"]["learning_rate"],
                                  weight_decay=config["training"]["weight_decay"])
     criterion = nn.CrossEntropyLoss()

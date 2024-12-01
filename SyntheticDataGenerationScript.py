@@ -158,7 +158,7 @@ class ShapeDataset:
             
             # Save shape to appropriate folder (train/val/test)
             split = self._get_split(idx)
-            self.save_shape(shape, split)
+            self.save_shape(shape, split, idx)
 
     def _get_split(self, idx):
         """Return 'train', 'val', or 'test' based on index."""
@@ -169,21 +169,24 @@ class ShapeDataset:
         else:
             return "test"
 
-    def save_shape(self, shape, split):
+    def save_shape(self, shape, split, idx):
         """Save the shape to a subfolder."""
         # Convert nodes (NumPy array) to list and ensure the edges are also in a serializable format
         shape_data = {
-            "label": shape.label, 
             "nodes": shape.nodes.tolist(),  # Convert NumPy array to list
             "edges": shape.edges  # Edges are already a list of tuples, so no conversion needed
         }
-        file_name = f"{shape.label}_{random.randint(0, 9999)}.json"
-        file_path = os.path.join("shapes", split, file_name)
         
+        # Only save the label for training data
+        if split == "train":
+            shape_data["label"] = shape.label
+
+        file_name = f"{shape.label}_{idx}.json" if split == "train" else f"{idx}.json"
+        file_path = os.path.join("shapes", split, file_name)
+    
         # Save the shape data as JSON
         with open(file_path, 'w') as f:
             json.dump(shape_data, f, indent=4)
-
     
     def visualize_each_class(self):
         """

@@ -8,12 +8,15 @@ def run_script(script_name):
         script_name (str): Name of the Python script to run.
     """
     print(f"Running {script_name}...")
+    
     # Execute the script using the current Python interpreter
     exit_code = os.system(f"python {script_name}")
+    
     if exit_code != 0:
         # If the script fails (non-zero exit code), print an error message and exit
         print(f"Error occurred while running {script_name}. Exiting...")
         exit(1)
+    
     print(f"Finished {script_name}.\n")
 
 if __name__ == "__main__":

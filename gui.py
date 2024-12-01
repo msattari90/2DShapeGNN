@@ -60,12 +60,15 @@ class ShapePredictionApp:
         nodes = torch.tensor(shape_data["nodes"], dtype=torch.float).to(self.device)
         edges = torch.tensor(shape_data["edges"], dtype=torch.long).t().contiguous().to(self.device)
         
-        # Convert string label to numeric using the label mapping
-        label_str = shape_data["label"]
-        label_numeric = self.label_mapping[label_str]
-        
-        # Create a graph data object
-        data = Data(x=nodes, edge_index=edges, y=torch.tensor([label_numeric], dtype=torch.long).to(self.device))
+        # Check if the label exists in the shape data (for validation/test, it will not exist)
+        if "label" in shape_data:
+            # Convert string label to numeric using the label mapping
+            label_str = shape_data["label"]
+            label_numeric = self.label_mapping[label_str]
+            data = Data(x=nodes, edge_index=edges, y=torch.tensor([label_numeric], dtype=torch.long).to(self.device))
+        else:
+            # For test/validation, there is no label, so create the data object without the label
+            data = Data(x=nodes, edge_index=edges)
 
         # Predict the label
         with torch.no_grad():
@@ -75,13 +78,10 @@ class ShapePredictionApp:
             # Find the predicted shape label
             predicted_shape = list(self.label_mapping.keys())[list(self.label_mapping.values()).index(predicted_label)]
 
-        # Update the label in the GUI
-        self.result_label.config(text=f"Prediction: {predicted_shape}")
-        
         # Plot the shape
-        self.plot_shape(shape_data)
+        self.plot_shape(shape_data, predicted_shape)
 
-    def plot_shape(self, shape_data):
+    def plot_shape(self, shape_data, predicted_shape):
         """Plot the selected shape."""
         nodes = np.array(shape_data["nodes"])
         edges = shape_data["edges"]
@@ -90,7 +90,10 @@ class ShapePredictionApp:
         for start, end in edges:
             plt.plot([nodes[start][0], nodes[end][0]], [nodes[start][1], nodes[end][1]], "k-")
         plt.scatter(nodes[:, 0], nodes[:, 1], color="red")
-        plt.title(f"Shape: {shape_data['label']}")
+        
+        # Handle the case where the label might not exist (for test/validation data)
+        shape_label = shape_data.get('label', predicted_shape)  # Default to 'Unknown' if no label
+        plt.title(f"Shape: {shape_label}")
         plt.axis("equal")
         plt.show()
         

@@ -113,6 +113,7 @@ if __name__ == "__main__":
 
     # Initialize model and load trained weights
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
     model = SimpleGNN(
         input_dim=config["model"]["input_dim"],
         hidden_dim=config["model"]["hidden_dim"],
@@ -120,6 +121,7 @@ if __name__ == "__main__":
         num_layers=config["model"]["num_layers"],
         dropout=config["model"]["dropout"]
     ).to(device)
+    
     model.load_state_dict(torch.load("trained_model.pth"))
     model.eval()
 
